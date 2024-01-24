@@ -13,8 +13,6 @@ RUN huggingface-cli download TheBloke/phi-2-GGUF phi-2.Q4_K_M.gguf --local-dir .
 COPY static /static
 COPY templates /templates
 
-RUN pip install flask
-
 COPY app.py /app.py
 
 CMD ["python", "app.py"]
