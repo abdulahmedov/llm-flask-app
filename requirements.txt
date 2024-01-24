@@ -7,3 +7,4 @@ einops==0.7.0
 accelerate==0.25.0
 huggingface-hub==0.20.2
 hf_transfer==0.1.4
+llama_cpp_python==0.2.31
