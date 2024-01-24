@@ -17,6 +17,6 @@ RUN pip install flask
 
 COPY app.py /app.py
 
-CMD ["python", "capp.py"]
+CMD ["python", "app.py"]
 
 EXPOSE 5000
