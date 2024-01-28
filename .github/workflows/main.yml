@@ -22,4 +22,4 @@ jobs:
       - name: Install self
         run: pip install -e .
       - name: Run tests
-        run: pytests .
+        run: pytest .

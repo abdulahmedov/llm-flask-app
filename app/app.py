@@ -7,6 +7,9 @@ from langchain_community.llms import LlamaCpp
 from flask import Flask, jsonify, render_template, request
 
 
+#install gunicorn
+
+
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 llm = LlamaCpp(
     model_path="phi-2.Q4_K_M.gguf",
