@@ -21,7 +21,7 @@ llm = LlamaCpp(
 )
 
 
-def chatbot_response(msg) -> str:
+def chatbot_response(msg: str) -> str:
     prompt = f'Question: {msg}'
     return llm.invoke(msg)
 
