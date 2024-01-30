@@ -22,9 +22,7 @@ jobs:
         run: flake8 app/ --test-func-name-validator-regex="test_funky_convention_.*" --select=TN101
       - name: Run mypy
         run: mypy app
-      - name: Install self
-        run: pip install -e .
       - name: Run tests
-        run: pytest .
+        run: python -m pytest
       - name: run Docker
         run: docker build .
