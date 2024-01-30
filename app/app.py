@@ -10,20 +10,21 @@ from flask import Flask, jsonify, render_template, request
 #install gunicorn
 
 
-callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
-llm = LlamaCpp(
-    model_path="phi-2.Q4_K_M.gguf",
-    temperature=0.75,
-    max_tokens=2000,
-    top_p=1,
-    callback_manager=callback_manager,
-    verbose=True,  # Verbose is required to pass to the callback manager
-)
+# callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
+# llm = LlamaCpp(
+#     model_path="phi-2.Q4_K_M.gguf",
+#     temperature=0.75,
+#     max_tokens=2000,
+#     top_p=1,
+#     callback_manager=callback_manager,
+#     verbose=True,  # Verbose is required to pass to the callback manager
+# )
 
 
 def chatbot_response(msg: str) -> str:
     prompt = f'Question: {msg}'
-    return llm.invoke(msg)
+    return 'hui'
+    # return llm.invoke(msg)
 
 app = Flask(__name__)
 app.static_folder = 'static'
