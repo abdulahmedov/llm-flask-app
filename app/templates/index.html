@@ -47,9 +47,9 @@
   <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
   <script>
 
-    const msgerForm = get(".msger-inputarea");
-    const msgerInput = get(".msger-input");
-    const msgerChat = get(".msger-chat");
+    const msgerForm = post(".msger-inputarea");
+    const msgerInput = post(".msger-input");
+    const msgerChat = post(".msger-chat");
 
 
     // Icons made by Freepik from www.flaticon.com
@@ -93,7 +93,7 @@
     function botResponse(rawText) {
 
       // Bot Response
-      $.get("/get", { msg: rawText }).done(function (data) {
+      $.post("/post", { msg: rawText }).done(function (data) {
         console.log(rawText);
         console.log(data);
         const msgText = data;
@@ -106,6 +106,10 @@
 
     // Utils
     function get(selector, root = document) {
+      return root.querySelector(selector);
+    }
+
+    function post(selector, root = document) {
       return root.querySelector(selector);
     }
 
