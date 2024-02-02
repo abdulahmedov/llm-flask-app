@@ -35,11 +35,10 @@ def is_toxic(prompt: Prompt, toxic_words_reference: Any, threshold: float) -> bo
     toxicity = 0.0
     words = prompt.body
     words = words.replace(',', '').replace('.', '')
-    # words = words
     for word in words.split(' '):
         word = word.lower()
         if word in toxic_words_reference:
-            toxicity += 1 / len(words)
+            toxicity += 1 / len(words.split(' '))
             if toxicity >= threshold:
                 return True
     return False

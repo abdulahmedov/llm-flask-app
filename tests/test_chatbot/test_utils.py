@@ -53,7 +53,7 @@ def test_is_prompt_valid(prompt_string: str, expected_result: str):
         (Prompt('Readability counts.'), toxic_words_reference, threshold, False),
         (Prompt('Special cases aren\'t special enough to break the rules.'), toxic_words_reference, threshold, False),
         (Prompt('fuck fuck fuck.'), toxic_words_reference, threshold, True),
-        (Prompt('Love, Death & Robots.'), toxic_words_reference, threshold, False),
+        (Prompt('*itches, 4r5e & 5h1t.'), toxic_words_reference, threshold, True),
     ]
 )
 def test_is_prompt_toxic(prompt_string: str, toxic_words_reference: List[str], threshold: float, expected_result: bool):
