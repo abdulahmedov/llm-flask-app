@@ -1,10 +1,11 @@
-from app.chatbot import Prompt, is_toxic
+from app.chatbot import Prompt, is_toxic, chatbot_response
 from app.utils import read_datafile
 
 import pytest
 from hypothesis import given
 from hypothesis.strategies import text
 from langchain_community.llms import LlamaCpp
+from typing import List
 
 
 toxic_words_reference = read_datafile('app/toxic_words.txt')
@@ -18,7 +19,7 @@ class DummyLlamaCppForTest(LlamaCpp):
     def invoke(self, prompt: str) -> str:
         return prompt
 
-llm = DummyLlamaCppForTest()
+dummy_llm = DummyLlamaCppForTest()
 
 @pytest.mark.parametrize(
     "prompt_string,expected_result",
@@ -55,10 +56,21 @@ def test_is_prompt_valid(prompt_string: str, expected_result: str):
         (Prompt('Love, Death & Robots.'), toxic_words_reference, threshold, False),
     ]
 )
-def test_is_prompt_toxic(prompt_string, toxic_words_reference, threshold, expected_result):
+def test_is_prompt_toxic(prompt_string: str, toxic_words_reference: List[str], threshold: float, expected_result: bool):
     assert is_toxic(prompt_string, toxic_words_reference, threshold) == expected_result
-# def test_is_response_type_valid():
-#     assert type(chatbot_response(prompt, llm)) == Response
+
+
+@pytest.mark.parametrize(
+    "prompt_string,llm,expected_result",
+    [
+        (Prompt('Simple is better than com\nplex.'), dummy_llm, 'Simple is better than com<br>plex.'),
+        (Prompt('Complex \nis better than complicated.'), dummy_llm, 'Complex <br>is better than complicated.'),
+        (Prompt('Flat is better than nested.'), dummy_llm, 'Flat is better than nested.'),
+        (Prompt('Readab\nility counts.'), dummy_llm, 'Readab<br>ility counts.'),
+    ]
+)
+def test_is_chatbot_response_valid(prompt_string: Prompt, llm: LlamaCpp, expected_result: str):
+    assert chatbot_response(prompt_string, llm) == expected_result
 
 
 def encode(input_string):
