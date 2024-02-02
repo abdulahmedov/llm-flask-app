@@ -14,6 +14,6 @@ RUN huggingface-cli download TheBloke/phi-2-GGUF phi-2.Q4_K_M.gguf --local-dir .
 
 COPY /app /app
 
-CMD ["gunicorn", "--config", "gunicorn_config.py", "server:app"]
+CMD ["gunicorn", "--chdir", "app", "--config", "app/gunicorn_config.py", "server:app", "--timeout", "600"]
 
 EXPOSE 8000

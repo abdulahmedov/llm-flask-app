@@ -1,8 +1,7 @@
-from app.chatbot import chatbot_response, Prompt, Response, is_toxic
+from app.chatbot import Prompt, is_toxic
 from app.utils import read_datafile
 
 import pytest
-import deal
 from hypothesis import given
 from hypothesis.strategies import text
 from langchain_community.llms import LlamaCpp
@@ -91,9 +90,3 @@ def decode(lst):
 @given(text())
 def test_decode_inverts_encode(prompt_string: str):
     assert decode(encode(prompt_string)) == prompt_string
-
-#deal.cases()
-
-#selenium
-
-#freezegun

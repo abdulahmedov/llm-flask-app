@@ -21,4 +21,3 @@ pytest==8.0.0
 gevent==23.9.1
 pre_commit==3.6.0
 hypothesis==6.97.4
-deal[all]
